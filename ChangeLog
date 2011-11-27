@@ -1,0 +1,69 @@
+aifled version 0.1 (January 2010)
+* added the capabilitie to correctly handle 2.6 kernel family
+* added the capabilitie to create and delete the pid file
+* modify the way in which the process fork to go into background
+
+sifled version 0.5 (September 2006)
+* added usleep() to end of set_led() function to resolve issue with using
+  single instance of sifled to drive multiple LEDs (thanks to Tom Eichstaedt)
+* added -D parameter for detailed debugging to a text file (/tmp/sifled.log)
+* significant changes to the way status/debug/verbose messages are logged
+
+sifled version 0.4 (Nov 28 2002)
+* fixed segmentation fault if monitoring ppp0 interface, and it was
+  down for more than a few minutes (ie, if interface didn't exist in 
+  /proc/net/dev)
+* added -v parameter for verbose mode (use twice for more verbosity)
+
+sifled version 0.3 (Jan 19 2002)
+* in update_netproc, if failing to open /proc/net/dev, just populate bp with 0
+
+sifled version 0.3 (Nov 17 2001)
+* don't abort in update_netproc if failing to open /proc/net/dev
+* "make clean" doesn't delete executable sifled anymore
+
+sifled version 0.2 (Oct 19 2001)
+* don't abort if specified interface isn't found, else if started on 
+  Smoothwall before red interface is up, it fails
+
+sifled Version 0.1 (Oct 06 2001)
+* Added option to show Smoothwall RED iface active
+
+ifled changelog:
+
+Version 0.5 to 0.6 (Dec 11 1999)
+* Rewrote much of the update_netproc code, now faster (?) and smaller
+* Updated the README file
+* Fixed the Makefile a bit
+
+Version 0.4 to 0.5 (Oct 16 1999)
+
+* Increased LED update delay to 50ms, solves some problems with keys getting
+  stuck. Thansk to Mikko Hänninen <Mikko.Hanninen@iki.fi>
+* Removed init script. Nobody used it, or?
+* Added some problem solutions to the README file
+* Fixed the help screen a bit
+* General code clean-up
+
+Version 0.3 to 0.4 (Oct 1 1999)
+
+* Added README file
+* Added ChangeLog
+* Added alternativ (exprimental) kb code to get none config to work in console
+* Fixed options to use bit flags
+* Fixed none option to not touch LED status
+  (suggested by Drew Wilcock <drew@routes.com> 
+  and Mikko Hänninen <Mikko.Hanninen@iki.fi>)
+* Added none option to help
+
+Version 0.2 to 0.3 (Sep 28 1999)
+
+* Fixed bug with the error led config
+* Added drop, activity and collision
+* General code clean-up
+* Changed default led config and delay
+* Made verison 0.3
+
+Version 0.2 (Sep 26 1999)
+
+* First release

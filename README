@@ -1,0 +1,81 @@
+Smoothwall InterfaceLED README file.
+
+
+What is it?
+-----------
+Smoothwall InterfaceLED is based on InterfaceLED (ifled), a program 
+that uses the keybord LEDs to indicated various
+things about a specified interface, ie, if a network card is sending
+or receiving data.
+sifled has some functionality specifically for use with Smoothwall
+(www.smoothwall.org), namely to allow one of the LEDs to indicate
+the status of the Smoothwall RED interface (ie, up or down).
+
+See http://martybugs.net/smoothwall/leds.cgi for more information.
+
+
+How do i install it?
+--------------------
+Put it into /usr/local/bin, /usr/sbin or some other directory.
+To make it automatically start whenever your Smoothwall box reboots, add
+a line to the end of your /etc/rc.d/rc.sysinit to start sifled.
+ie, 
+/usr/local/bin/sifled console ppp0 -c ltr -f
+
+
+How do i use it?
+----------------
+Just run "sifled [tty here] [interface here]" to use the default settings.
+Use "console" as tty to use the current tty, as interface use the interface you
+would like to monitor eg: eth0, ppp0. To run the ifled in background add -f to
+the command line.
+
+Example command:
+sifled console eth0 -f
+
+
+How do i config the LEDs? / How do i get ifled not to touch my num-lock etc?
+----------------------------------------------------------------------------
+Look in the list of options from the help (start ifled with no arguments).
+For exmaple "-c crt" will make num-lock indicate collisions, caps-lock indicate
+receiveing of data and scroll-lock indicate transmitting of data.
+
+A popular LED config is "-c nna" this will make num-lock and caps-lock work as
+normal (hopefully) and scroll-lock indicate activity (the interface is
+receiving or transmitting data)
+
+Note: You can't use arguments like "-ic nna", use "-i -c nna" insted. 
+
+
+How do i get the none option to work in console?
+------------------------------------------------
+If you can't use your (num,caps,scroll)-lock as normal when you use the none
+option on them, try the "-a" option it may work.
+
+
+The keybord is weird, keys get stuck etc
+----------------------------------------
+Try to increase the LED update delay by use the -d parameter. 100ms should
+solve the problem, if not try to increase even more. Note that the LEDs will
+flash slower at higher LED update delays.
+
+
+How to i monitor more then one interface?
+-----------------------------------------
+Use the "n" option with the "-c" parameter for example:
+
+./sifled console ppp0 -c nla -f  // Caps-lock will indicate status of Smoothwall RED interface 
+                                // and Scroll-lock will flash on activity on ppp0
+./sifled console eth0 -c ann -f  // Num-lock will flash on activity on eth0
+
+
+The terminal LEDs gets fu*ked up after i have run ifled
+-------------------------------------------------------
+Type the command "reset" to do a terminal initialization.
+Note that you'll probably have to login to your Smoothwall console to do this,
+as I haven't had much success running this through a SSH connection.
+
+
+Martin Pot <mpot@martybugs.net>
+Mattias Wadman <napolium@sudac.org>
+
